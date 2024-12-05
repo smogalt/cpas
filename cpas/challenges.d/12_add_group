@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+
+	! (grep parents /etc/group) > /dev/null 2>&1 && score=$(($score - 5))
+	! (awk -F':' '/parents/{print $4}' /etc/group | grep mr_turner | grep mrs_turner > /dev/null 2>&1) && score=$(($score - 5))
+
+	echo $score 
+fi

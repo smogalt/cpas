@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ `whoami` != "root" ]; then
+	echo "you need to run cpas as root"
+	exit
+fi
+
+if [ "$1" = "--make" ]; then
+	total_score=0
+
+	for chal in /etc/cpas/challenges.d/*; do
+		total_score=$(( $total_score + `$chal --make` ))
+	done
+
+	echo $total_score > /etc/cpas/total_score
+
+	for chal in /etc/cpas/snippets.d/*; do
+		cat $chal >> /home/admin/README
+	done
+
+	exit
+fi
+
+if [ "$1" = "--score" ]; then
+	cur_score=0
+	for chal in /etc/cpas/challenges.d/*; do
+		cur_score=$(( $cur_score + `$chal --score` ))
+	done
+	echo $cur_score/`cat /etc/cpas/total_score`
+	exit
+fi
+
+echo "Invalid arguement"

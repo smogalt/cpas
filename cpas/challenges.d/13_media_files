@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+        touch /home/mr_turner/work.docx
+        touch /home/vicky/music.mp3
+        touch /home/cosmo/wand.jpg
+
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+
+[ -f /home/cosmo/wand.jpg ] && [ -f /home/cosmo/wand.jpg ] && [ -f /home/vicky/music.mp3 ] && score=$(($score - 10))
+
+	echo $score 
+fi

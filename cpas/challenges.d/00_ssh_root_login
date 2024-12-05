@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+	sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+
+	! (grep -E "PermitRootLogin\sno" /etc/ssh/sshd_config > /dev/null 2>&1) && score=$(($score - 10))
+
+	echo $score 
+fi

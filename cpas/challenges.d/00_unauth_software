@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+	apt-get install -y nmap hydra > /dev/null 2>&1
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+
+	! (whereis nmap | grep -x 'nmap:'  > /dev/null 2>&1) && score=$(($score - 5))
+        ! (whereis hydra | grep -x 'hydra:' > /dev/null 2>&1) && score=$(($score - 5))
+
+	echo $score 
+fi

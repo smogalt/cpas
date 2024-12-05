@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+
+	(grep -E "PASS_MAX_DAYS\s99999" /etc/login.defs > /dev/null 2>&1) && score=$(($score - 10))
+
+	echo $score 
+fi

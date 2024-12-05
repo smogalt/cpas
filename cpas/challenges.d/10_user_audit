@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ "$1" = "--make" ]; then
+	/sbin/useradd -m timmy > /dev/null 2>&1
+        /sbin/useradd -m cosmo > /dev/null 2>&1
+        /sbin/useradd -m wanda > /dev/null 2>&1
+        /sbin/useradd -m mr_turner > /dev/null 2>&1
+        /sbin/useradd -m mrs_turner > /dev/null 2>&1
+        /sbin/useradd -m mr_crocker > /dev/null 2>&1
+        /sbin/useradd -m vicky > /dev/null 2>&1
+
+	/sbin/groupadd adm > /dev/null 2>&1
+        gpasswd -M cosmo,wanda adm > /dev/null 2>&1
+
+	# total points you can earn
+	echo "10"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=10
+	id vicky > /dev/null 2>&1 && score=$(($score - 5))
+	id mr_crocker > /dev/null 2>&1 && score=$(($score - 5))
+
+	echo $score 
+fi

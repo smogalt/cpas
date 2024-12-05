@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# max points
+points=5
+
+if [ "$1" = "--make" ]; then
+	echo "$points"
+fi
+
+if [ "$1" = "--score" ]; then
+	score=$points
+
+	!((ls -l /etc/shadow | grep -e "-r--r-----") || (ls -l /etc/shadow | grep -e "----------")) > /dev/null 2>&1 && score=$(($score - 5))
+
+	echo $score
+fi
